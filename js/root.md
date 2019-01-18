@@ -1,5 +1,5 @@
 ---
 root: true
 name: javascript
-sort: 8
+sort: 1
 ---
