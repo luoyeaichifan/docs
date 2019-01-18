@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        document.write("<h1>Hello World!</h1>")
+    </script>
+
+
+    <form>
+        first name :<br />
+        <input type="text" name="firstname"><br />
+        second name :<br />
+        <input type="text" name="secondname">
+    </form>
+
+    <form action="test.html">
+        <input type="radio" name="sex" value="male" checked>Male
+        <input type="radio" name="sex" value="female">Female
+        <input type="submit" value="提交">
+    </form>
+
+
+    <form action="/demo/demo_form.asp">
+        <fieldset>
+            <legend>Personal information:</legend>
+            First name:<br>
+            <input type="text" name="firstname" value="Mickey">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastname" value="Mouse">
+            <br><br>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+
+
+
+    <form action="/demo/demo_form.asp">
+        <select name="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <br><br>
+        <input type="submit">
+    </form>
+
+    <button type="button" onclick="alert('Hello World!')">点击我！</button>
+
+    <form action="/demo/demo_form.asp">
+
+        <input list="browsers" name="browser">
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+        <input type="submit">
+    </form>
+
+
+    <form action="/demo/demo_form.asp">
+        <input type="checkbox" name="vehicle" value="Bike">I have a bike
+        <br>
+        <input type="checkbox" name="vehicle" value="Car">I have a car
+        <br><br>
+        <input type="submit">
+    </form>
+
+    <form>
+        Quantity (between 1 and 5):
+        <input type="number" name="quantity" min="1" max="5">
+    </form>
+
+
+    <form action="">
+        First name:<br>
+        <input type="text" name="firstname" value="John">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname">
+    </form>
+
+</body>
+</html>
