@@ -11,6 +11,8 @@ sort: 0
 2、按需渲染数据图形
 
 [docker](https://github.com/graphite-project/docker-graphite-statsd)
+
+```
 docker run -d\
  --name graphite\
  --restart=always\
@@ -22,8 +24,7 @@ docker run -d\
  graphiteapp/graphite-statsd
 ```
 
-3、点击查看页面
-[graphite](http://47.104.66.33:8080)
+
 
 4、测试
 
