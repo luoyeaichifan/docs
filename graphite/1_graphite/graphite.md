@@ -3,15 +3,14 @@ name: 什么是graphite
 sort: 0
 ---
 
-# [graphite](http://47.104.66.33:8080) 做两件事
+# <a href="http://47.104.66.33:8080" target="_blank">graphite</a> 做两件事
+
 
 1、存储时间序列
 
 2、按需渲染数据图形
 
 [docker](https://github.com/graphite-project/docker-graphite-statsd)
-
-```
 docker run -d\
  --name graphite\
  --restart=always\
