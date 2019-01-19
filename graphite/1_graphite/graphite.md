@@ -1,5 +1,5 @@
 ---
-name: 什么是graphite
+name: graphite/grafana
 sort: 0
 ---
 
@@ -51,6 +51,16 @@ do
 	sleep 1
 done
 
+```
+
+
+
+
+# <a href="http://47.104.66.33:3000/d/aKAhfYQik/cpu-mem?panelId=2&orgId=1" target="_blank">grafana</a> 展示
+
+```$xslt
+用户名: admin
+密码: admin
 ```
 
 # 正向代理与反向代理
