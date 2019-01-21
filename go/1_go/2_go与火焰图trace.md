@@ -127,10 +127,10 @@ go get -v github.com/uber/go-torch
 	```
 	
 
-	![profile](../images/profile001.png)
-	![profile](../../images/profile001.png)
+![profile](../images/profile001.png)
+![profile](../../images/profile001.png)
 	
-	![](../images/init.png)
+![](../images/init.png)
 	
 	
 	
