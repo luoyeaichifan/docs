@@ -128,10 +128,12 @@ go get -v github.com/uber/go-torch
 	
 
 ![profile](../images/profile001.png)
-![profile](../../images/profile001.png)
-	
-![](../images/init.png)
+
 	
 	
 	
 	出现 Failed to execute dot. Is Graphviz installed? Error: exec: "dot": executable file not found in $PATH 报错, 需要安装 graphviz 在 mac 上就直接 brew install graphviz 即可
+	
+	
+	
+	
