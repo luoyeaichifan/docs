@@ -126,7 +126,7 @@ go get -v github.com/uber/go-torch
 	或者网页访问:http://127.0.0.1:12345/debug/pprof/
 	```
 	
-	![profile](../../images/go/profile001.png)
+	![profile](../images/profile001.png)
 	
 	
 	
