@@ -3,6 +3,8 @@ name: brief
 sort: 0
 ---
 
+[力扣](https://leetcode-cn.com/problemset/all/)
+
 # 时间复杂度
 
 ```
