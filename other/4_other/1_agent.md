@@ -24,7 +24,7 @@ fatal: unable to access 'https://github.com/bailicangdu/vue2-elm.git/': Received
 
 git config --global --unset http.proxy
 git config --global --unset https.proxy
-查看全部的git全局设置
+
 
 git config --global --unset http.https://github.com.proxy
 只对github.com
