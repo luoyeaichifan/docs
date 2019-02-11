@@ -170,7 +170,7 @@ mysql是关系型数据库,可以理解成表格的概念
 
 ```
 数字类型
-	整数:tinyint,smallint,mediumint,init,bingint
+	整数:tinyint,smallint,mediumint,init,bigint
 	浮点数:float,double,real,decimal
 日期和时间:date,time,datetime,timestamp,year
 字符串类型:
