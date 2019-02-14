@@ -10,6 +10,9 @@ sort: 0
 ```
 docker pull mysql
 docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=**** -d mysql:5.6
+
+
+
 ```		
 
 - 登陆
@@ -38,6 +41,12 @@ show tables
 
 ```
 select version();
+```
+
+- 当前所在数据库
+
+```
+select database();
 ```
 
 - mysql 设置外网访问
@@ -299,3 +308,109 @@ drop table 表名;
 drop database 数据库名
 ```
 
+## mysql 面试题
+
+
+[链接](https://www.cnblogs.com/dannylinux/articles/8288790.html)
+
+
+- mysql 开启与关闭
+
+```
+service mysqld start
+service mysqld stop
+```
+
+- 	修改密码
+
+```
+ mysqladmin -u root -p12345 password '123456'
+```
+
+- 查看当前数据库的字符集
+
+```
+show variables like "%charac%";
+```
+
+- 查看当前登陆的用户
+
+```
+select user();
+```
+
+- 创建gbk字符集的数据库,并且查询数据库
+
+```
+create database oldboy default character set gbk;
+show create database oldboy;
+```
+
+- 创建用户oldboy,使之可以管理oldboy数据库
+
+```
+grant select,update,alter,delete,drop,insert on oldboy.* to oldboy@localhost identified by '123456';
+show grants for oldboy@localhost;
+```
+
+- 查看当前数据有哪些用户
+
+```
+select user,host from mysql.user;
+```
+
+- 创建一个innodb GBK表test，字段id int(4)和name varchar(16)
+
+```
+create table test (id int(4),name varchar(16)) engine=InnoDB default charset=gbk;
+```
+
+- 查看建表结构及表结构的SQL语句
+
+```
+desc test;
+show create table test;
+```
+
+- 再批量插入2行数据 “2,老男孩”，“3,oldboyedu” 
+
+```
+insert into test (id,name) values (2,"laonanhai") ,(3,"oldboyyedu");
+```
+
+- 把数据id等于1的名字oldboy更改为oldgirl
+
+```
+mysql> update test set name='oldgirl' where id=1;
+```
+
+- 在字段name前插入age字段，类型tinyint(2)
+
+```
+mysql> alter table test add age tinyint(2) after id;
+```
+
+- 不退出数据库完成数据库的备份
+
+```
+system mysqldump -uroot -p123456 -B -x -F --events oldboy > /opt/bak.sql;
+```
+
+- 删除数据库中的所有数据,并查看
+
+```
+delete from test;
+```
+
+- 删除表和数据库
+
+```
+drop table test;
+drop database oldboy;
+```
+
+- 恢复数据库
+
+```
+system mysql -uroot -p123456 </opt/test.sql
+```
