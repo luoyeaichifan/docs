@@ -414,3 +414,213 @@ drop database oldboy;
 ```
 system mysql -uroot -p123456 </opt/test.sql
 ```
+
+- 把库表的gbk字符集改成UTF8
+
+```
+alter database oldboy default charset utf8
+alter table test default charset utf8
+```
+
+- 把id设置为主键,在name字段上面创建普通索引
+
+```
+alter table test add primary key(id);
+alter table test add index index_name(name);
+```
+
+```
+26.   在字段name后插入手机号字段(shouji)，类型char(11)。
+
+mysql> alter table test add shouji char(11) after name;
+
+ 
+
+27.   所有字段上插入2条记录（自行设定数据）
+
+mysql> insert into test (id,age,name,shouji) values ('4','27','wangning','13833573773');
+
+mysql> insert into test (id,age,name,shouji) values ('5','30','litao','13833573773');
+```
+- 对手机字段前8个字符创建普通索引
+
+```
+alter table test add index index_shouji(shouji(8))
+```
+
+- 添加主键索引
+
+```
+alter table test add primary key id_name(id)
+```
+
+- 查看创建的索引以及索引类型等信息
+
+```
+show index from test;
+show index from test\G;
+```
+
+- 删除name shouji的索引
+
+```
+alter table test drop index index_name
+alter table test drop index index_shouji
+```
+
+- 对于name的前六个字符和shouji的前8个字符创建联合索引
+
+```
+create index index_name_shouji on test(name(6),shouji(8));
+```
+
+- 查询手机号以135开头的，名字为oldboy的记录（提前插入）
+
+```
+select * from test where name="oldbody" and shouji like "135%"; 
+select * from test where name="wangning" and shouji like "138%";
+```
+
+- 查询上述语句的执行计划(是否使用联合索引)
+
+```
+explain select * from test where name="wangning" and shouji like "138%"\G;
+```
+
+- 将表的引擎改成myisam
+
+```
+alter table test engine=myisam
+```
+
+- 回收revoke用户的select权限
+
+```
+revoke select on oldboy.* from oldboy@localhost
+```
+
+- 删除用户
+
+```
+drop user oldboy@localhost;
+```
+
+- 关闭数据库
+
+```
+mysqladmin -uroot -p123456 shutdown;
+```
+
+## 面试问题
+
+- 请解释关系型数据库的概念优缺点
+
+```
+关系型数据库就是由二维表及其之间的联系所组成的数据组织
+
+特点: 事务的一致性
+	  容易理解、方便、支持SQL
+	  
+缺点: 
+	1、高并发的读写需求:网站用户的并发非常高 往往每秒上万次读写请求,硬盘的I/O是个很大的瓶颈
+	2、对于数据量巨大的网站来说,关系型数据库的查询效率非常低
+	3、固定的表结构
+```
+
+- 关系型数据库的典型产品、特点及应用场景
+
+```
+1、SQLserver
+承载中小型web后台数据
+2、mysql 开源
+承载中小型web后台数据
+3、oracle
+国旗事业单位
+```
+
+- 请解释非关系型数据库概念及主要特点
+
+```
+1、使用键值对存储数据,且结构不稳定
+2、一般不支持ACID特性(数据库事务正确执行的基本要素,
+原子性atomicity
+一致性consistency
+隔离性lsolation
+持久性durability)
+3、基于键值对,数据没有耦合性,容易扩展
+4、不提供SQL支持,学习和使用成本高
+```
+
+- 请说出非关系型数据库的典型产品、特点以及应用场景
+
+```
+MongoDB
+
+redis
+
+sqllite
+```
+
+- 详细描述sql语句分类以及对应代表性关键字
+
+```
+DDL (data definition language) (create alter drop),管理基础数据库,例库、表
+DCL (data control language) (grant、revoke、commit、rollback),用户授权,权限回收,数据提交回滚
+DML (data manipulation language) 数据操作语言select insert delete update
+```
+
+- char(4)与varchar(4)的差别
+
+```
+char(4)是固定长度4,不够四位时,空格补全
+varchar(4)是变长长度,不到4位,不补全
+```
+
+```
+46.   如何授权oldboy用户从172.16.1.0/24访问数据库。
+mysql> grant all on *.* to oldboy@'172.16.1.%' identified by '123456';
+```
+
+- 什么是mysql多实例
+
+```
+在一台服务器上,mysql服务开启多个不同的端口,运行多个服务进程
+```
+
+- 如何加强mysql安全
+
+```
+1、避免从互联网访问mysql.确保特定主机才拥有访问权限
+2、定期备份数据库
+3、禁用或限制远程访问
+4、移除test数据库(默认匿名用户可以访问test数据库)
+5、禁用local infile
+6、移除匿名用户和废弃的用户
+7、限制mysql数据库用户的权限
+8、移除和禁用.mysql_history文件
+```
+
+- delete 和 truncate删除数据的区别
+
+```
+truncate table test 执行更快,清空物理文件,清空表中的所有内容
+delete from test 是逻辑删除,按行删除,而且可以通过where语句选择要删除的行
+```
+
+- mysql 主从复制的原理
+
+```
+1、主:binlog线程记录所有改变了数据库数据的语句,放进master上的binlog中
+2、从:IO线程,在使用start slave之后,负责从master上拉去binlog内容,放进自己的relay log中
+3、从:SQL执行线程,执行relay log中的语句
+
+配置步骤:
+1、主库开启binlog日志功能
+2、全备数据库,记录好binlog文件和相应的位置
+3、从库上配置和主库的连接信息
+4、将全备数据库导入从库
+5、从库启动slave
+6、在从库上查看同步状态,确认是否同步成功
+```
+
+
