@@ -17,6 +17,65 @@ docker run -p 6379:6379 -v $PWD/data:/data  -d redis:3.2 redis-server --appendon
 
 redis-server --appendonly yes : 在容器执行redis-server启动命令，并打开redis持久化配置
 ```
+# 查看redis是否启动
+
+```
+redis-cli 
+redis-cli --raw 避免中文乱码
+
+远程登录
+redis-cli -h host -p port -a password
+```
+
+# 配置
+
+- 获取所有配置
+
+```
+config get *
+```
+
+#  特点
+
+- 数据类型
+
+```
+字符串
+set name "runoob"
+get name
+
+散列(hash)
+是一个键值对集合
+hmset myhash field1 "Hello" field2 "world"
+hget myhash field1
+hget myhash field2
+
+
+列表(list)
+简单的字符串列表,按照插入顺序排序
+lpush mylist test1
+lpush mylist test2
+lpush mylist test3
+lrange mylist 0 10
+
+
+集合(set) O(1)  集合内元素具有唯一性
+string 类型的无序集合
+
+sadd myset redis
+sadd myset mongodb
+smembers myset
+
+有序集合(zset)
+元素不允许重复,每个元素都会关联一个double类型的分数,通过该分数进行从小到大的排序
+
+
+```
+
+- 所有操作都是原子性的,支持事务(原子性、一致性、隔离性、持久性)
+
+
+
 
 # redis 命令
 
